@@ -11,6 +11,7 @@ $black: #000000;
 
 
 * {
+	box-sizing: border-box;
   font-family: $font-stack;
 	font-size: $font-size;
   font-weight: $font-weight;
@@ -48,8 +49,12 @@ $black: #000000;
 
 .input {
 	display: block;
+	width: 100%;
+	text-align: start;
 	border-style: none;
 	border-radius: 50px;
 	background: #F3F3FA;
-	padding: 10px 18px;
+	color: #000000CC;
+	outline: none;
+	padding: 10px 20px;
 }
