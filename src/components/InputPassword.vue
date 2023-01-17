@@ -1,0 +1,14 @@
+<template>
+	<label
+			for="password"
+			class="label"
+		>
+			Password
+		</label>
+		<input
+			type="password"
+			name="password"
+			id="password"
+			class="input"
+		>
+</template>

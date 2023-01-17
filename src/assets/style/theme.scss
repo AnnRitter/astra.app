@@ -1,7 +1,55 @@
 @import 'normalize.scss';
+
+$font-stack: 'Inter', sans-serif;
+$font-weight: 400;
+$font-size: 14px;
+$background: #FAF3F3;
+$main-color: #181C43;
+$text-color: #3E4462;
+$input-color:#000000CC;
+$black: #000000;
+
+
 * {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  background: #FAF3F3;
-  color: #181C43;
+  font-family: $font-stack;
+	font-size: $font-size;
+  font-weight: $font-weight;
+  background: $background;
+  color: $main-color;
+	text-align: center;
+}
+
+.container {
+	padding: 0 20px;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 800;
+	line-height: 30px;
+}
+
+.text {
+	line-height: 143%;
+	color: #3E4462;
+}
+
+.label {
+	display: block;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 167%;
+	color: #000000CC;
+	background: #FFFFFF;
+	text-align: start;
+	padding-left: 20px;
+	margin-bottom: 5px;
+}
+
+.input {
+	display: block;
+	border-style: none;
+	border-radius: 50px;
+	background: #F3F3FA;
+	padding: 10px 18px;
 }
