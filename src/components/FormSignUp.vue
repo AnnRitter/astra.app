@@ -8,6 +8,7 @@
 				Full name
 			</label>
 			<input
+				v-model="name"
 				type="text"
 				id="name"
 				class="input"
@@ -90,13 +91,24 @@
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, sameAs, helpers } from '@vuelidate/validators'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 const validatePassword = (value) => /^(?=.*[!@#$%^&*])(.*?[A-Z]){2,}.*$/.test(value)
 
 export default {
+	setup () {
+		const store = useStore()
+		const router = useRouter()
+		return {
+			store,
+			router
+		}
+	},
 	data () {
 		return {
 			v$: useVuelidate(),
+			name: '',
 			email: '',
 			password: {
 				password: '',
@@ -126,6 +138,22 @@ export default {
 	methods: {
 		submit () {
 			this.v$.$validate()
+			if (!this.v$.$error) {
+				this.register()
+			}
+		},
+		async register () {
+			const values = {
+				name: this.name,
+				email: this.email,
+				password: this.password.password
+			}
+			try {
+				await this.store.dispatch('auth/register', values)
+				this.router.push('/main')
+			} catch (e) {
+				console.log(e)
+			}
 		}
 	}
 

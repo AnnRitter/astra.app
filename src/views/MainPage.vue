@@ -1,15 +1,33 @@
 <template>
   <div class="main">
+		<a href="#" @click="logout">Выход</a>
     <div class="container">
-      <h1>Hello, John Doe!</h1>
+      <h1>Hello, {{ name }}!</h1>
       <div class="main__image"></div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
+export default {
+	setup () {
+		const store = useStore()
+		const router = useRouter()
+		return {
+			store,
+			router,
+			name: store.state.auth.userData.name
+		}
+	},
+	methods: {
+		logout () {
+			this.store.commit('auth/logout')
+			this.router.push('/')
+		}
+	}
 }
 </script>
 

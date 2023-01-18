@@ -55,10 +55,20 @@
 
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, helpers } from '@vuelidate/validators'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 const validatePassword = (value) => /^(?=.*[!@#$%^&*])(.*?[A-Z]){2,}.*$/.test(value)
 
 export default {
+	setup () {
+		const store = useStore()
+		const router = useRouter()
+		return {
+			store,
+			router
+		}
+	},
 	data () {
 		return {
 			v$: useVuelidate(),
@@ -82,6 +92,21 @@ export default {
 	methods: {
 		submit () {
 			this.v$.$validate()
+			if (!this.v$.$error) {
+				this.login()
+			}
+		},
+		async login () {
+			const values = {
+				email: this.email,
+				password: this.password
+			}
+			try {
+				await this.store.dispatch('auth/login', values)
+				this.router.push('/main')
+			} catch (e) {
+				console.log(e)
+			}
 		}
 	}
 
