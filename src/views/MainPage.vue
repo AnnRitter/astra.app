@@ -19,7 +19,7 @@ export default {
 		return {
 			store,
 			router,
-			name: store.state.auth.userData.name
+			name: store.state.auth.name
 		}
 	},
 	methods: {
