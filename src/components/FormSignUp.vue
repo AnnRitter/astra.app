@@ -21,6 +21,7 @@
 			inputId="password"
 			title="Password"
 			hasVisibility="true"
+			hasTooltip="true"
 			:hasError="v$.password.password.$error"
 			:errorText="v$.password.password.$errors[0]?.$message"
 			v-model="password.password"

@@ -5,7 +5,8 @@ export default {
 	state () {
 		return {
 			token: localStorage.getItem('token'),
-			name: localStorage.getItem('name')
+			name: localStorage.getItem('name'),
+			error: false
 		}
 	},
 	mutations: {
@@ -20,6 +21,12 @@ export default {
 			state.name = null
 			localStorage.removeItem('token')
 			localStorage.removeItem('name')
+		},
+		setError (state) {
+			state.error = true
+		},
+		removeError (state) {
+			state.error = false
 		}
 	},
 	actions: {
@@ -50,8 +57,7 @@ export default {
 				commit('setUserData', userData)
 			} catch (e) {
 				console.log(e.response.data.error.message)
-				throw new Error(e)
-				// обработать ошибку, вывести сообщение
+				commit('setError')
 			}
 		},
 		async sendUserData (_, payload) {

@@ -1,24 +1,27 @@
 <template>
   <div class="main">
-    <div class="container">
-      <h1
-				class="title"
-			>
-				Hello, {{ capitalize(name) }}!
-			</h1>
-      <div class="main__image"></div>
-			<a
-				class="logout-button"
-				href="#"
-				@click="logout"
-			>
-				Выход
-			</a>
+    <div class="container with-flex">
+			<div class="inner-wrap">
+				<a
+					class="logout-button"
+					href="#"
+					@click="logout"
+				>
+					Выход
+				</a>
+				<h1
+					class="title"
+				>
+					Hello, {{ capitalize(name) }}!
+				</h1>
+			</div>
+      <main-image/>
     </div>
   </div>
 </template>
 
 <script>
+import MainImage from '@/components/MainImage.vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
@@ -40,14 +43,15 @@ export default {
 		capitalize (string) {
 			return string.charAt(0).toUpperCase() + string.slice(1)
 		}
+	},
+	components: {
+		MainImage
 	}
 }
 </script>
 
 <style scoped lang="scss">
   .main {
-    padding-top: 160px;
-		padding-bottom: 30px;
     &__image {
       width: 100%;
 			height: 531px;

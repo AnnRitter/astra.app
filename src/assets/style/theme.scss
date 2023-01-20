@@ -24,6 +24,11 @@ $white: #FFFFFF;
 	text-align: center;
 }
 
+html {
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+
 .container {
 	max-width: 320px;
 	width: 100%;
@@ -34,7 +39,7 @@ $white: #FFFFFF;
 .form {
 	max-width: 230px;
 	width: 100%;
-	background: $white;
+	background: #FFFFFF;
 	border-radius: 40px;
 	padding: 23px 22px 18px;
 	margin: 0 auto 30px;
@@ -43,8 +48,8 @@ $white: #FFFFFF;
 		width: 100%;
 		font-weight: 500;
 		line-height: 143%;
-		color: $white;
-		background: $link-color;
+		color: #FFFFFF;
+		background: #1E1A3E;
 		border-style: none;
 		border-radius: 50px;
 		padding: 15px 0;
@@ -53,7 +58,7 @@ $white: #FFFFFF;
 	&__link {
 		font-weight: 500;
 		line-height: 143%;
-		color: $link-color;
+		color: #1E1A3E;
 	}
 
 	&__error {
@@ -61,7 +66,7 @@ $white: #FFFFFF;
 		bottom: 17px;
 		font-weight: 500;
 		line-height: 143%;
-		color: $white;
+		color: #FFFFFF;
 		background: #FF6683;
 		border-radius: 50px;
 		padding: 15px 45px;
@@ -76,50 +81,6 @@ $white: #FFFFFF;
 			background-position: center;
 			background-repeat: no-repeat;
 		}
-	}
-}
-
-.field {
-	background: $white;
-	margin-bottom: 25px;
-
-	&__wrap {
-		background: #ffffff;
-		position: relative;
-	}
-
-	&__label {
-		display: block;
-		font-size: 12px;
-		font-weight: 600;
-		line-height: 167%;
-		color: $input-color;
-		background: $white;
-		text-align: start;
-		padding-left: 20px;
-		margin-bottom: 5px;
-	}
-
-	&__input {
-		display: block;
-		width: 100%;
-		text-align: start;
-		border-style: none;
-		border-radius: 50px;
-		background: $input-background;
-		color: $input-color;
-		outline: none;
-		padding: 10px 20px;
-	}
-
-	&__error {
-		display: block;
-		font-size: 10px;
-		line-height: 200%;
-		color: $error-color;
-		background: $white;
-		text-align: start;
-		padding-left: 20px;
 	}
 }
 
@@ -153,4 +114,15 @@ $white: #FFFFFF;
 
 .disabled {
 	background: rgba(30, 26, 62,  0.4);
+}
+
+.inner-wrap {
+	margin-top: 65px;
+}
+.with-flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100vh;
 }

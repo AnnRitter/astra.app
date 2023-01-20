@@ -18,7 +18,7 @@
 			v-model="password"
 		/>
 		<button
-			:class="{form__submit:true, disabled: disabled}"
+			class="form__submit"
 			@click="submit"
 		>
 			Sign In
@@ -36,7 +36,8 @@
 		Sign Up
 	</router-link>
 	<div
-		v-if="v$.password.$error || v$.email.$error"
+		v-if="store.state.auth.error"
+		@click='remove'
 		class="form__error"
 	>
 		Wrong email or password
@@ -64,7 +65,6 @@ export default {
 	},
 	data () {
 		return {
-			disabled: false,
 			v$: useVuelidate(),
 			email: '',
 			password: ''
@@ -88,8 +88,6 @@ export default {
 			this.v$.$validate()
 			if (!this.v$.$error) {
 				this.login()
-			} else {
-				this.disabled = true
 			}
 		},
 		async login () {
@@ -103,6 +101,9 @@ export default {
 			} catch (e) {
 				console.log(e)
 			}
+		},
+		remove () {
+			this.store.commit('auth/removeError')
 		}
 	},
 	components: {

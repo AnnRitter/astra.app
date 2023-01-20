@@ -1,35 +1,39 @@
 <template>
 	<div class="enter">
-		<div class="container">
-			<h1 class="title enter__title">Ready for a great User experience?</h1>
-			<p class="text enter__text">Bring your media to the next level!</p>
-			<div class="enter__buttons">
-				<router-link
-					to="/signup"
-					class="enter__signup"
-				>
-					Sign Up
-				</router-link>
-				<router-link
-					to="/signin"
-					class="enter__signin"
-				>
-				</router-link>
+		<div class="container with-flex">
+			<div class="inner-wrap">
+				<h1 class="title enter__title">Ready for a great User experience?</h1>
+				<p class="text enter__text">Bring your media to the next level!</p>
+				<div class="enter__buttons">
+					<router-link
+						to="/signup"
+						class="enter__signup"
+					>
+						Sign Up
+					</router-link>
+					<router-link
+						to="/signin"
+						class="enter__signin"
+					>
+					</router-link>
+				</div>
 			</div>
-			<div class="enter__image"></div>
+			<enter-image/>
 		</div>
 	</div>
 </template>
 
 <script>
+import EnterImage from '@/components/EnterImage.vue'
 export default {
+	components: {
+		EnterImage
+	}
 }
 </script>
 
 <style scoped lang="scss">
 	.enter {
-		margin-top: 65px;
-
 		&__title {
 			margin-bottom: 20px;
 		}
