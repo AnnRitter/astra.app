@@ -1,58 +1,51 @@
 <template>
 	<form class="form" @submit.prevent>
-		<div class="form__field">
-			<label
-				for="email"
-				class="label"
-			>
-				Email
-			</label>
-			<input
-				v-model="email"
-				type="text"
-				id="email"
-				class="input"
-			>
-			<span
-				v-if="v$.email.$error"
-				class="form__error"
-			>
-				{{ v$.email.$errors[0].$message }}
-			</span>
-		</div>
-		<div class="form__field">
-			<label
-				for="password"
-				class="label"
-			>
-				Password
-			</label>
-			<input
-				v-model="password"
-				type="password"
-				id="password"
-				class="input"
-			>
-			<span
-				v-if="v$.password.$error"
-				class="form__error"
-			>
-				{{ v$.password.$errors[0].$message }}
-			</span>
-		</div>
+		<form-input
+			inputType="text"
+			inputId="email"
+			title="Email"
+			:hasError="v$.email.$error"
+			:errorText="v$.email.$errors[0]?.$message"
+			v-model="email"
+		/>
+		<form-input
+			inputType="password"
+			inputId="password"
+			title="Password"
+			hasVisibility="true"
+			:hasError="v$.password.$error"
+			:errorText="v$.password.$errors[0]?.$message"
+			v-model="password"
+		/>
 		<button
-			class="form__signin"
+			:class="{form__submit:true, disabled: disabled}"
 			@click="submit"
 		>
 			Sign In
 		</button>
 	</form>
-	<p class="form__text">Don’t have an account yet?</p>
-	<router-link to="/signup" class="form__text">Sign Up</router-link>
+	<p
+		class="form__link"
+	>
+		Don’t have an account yet?
+	</p>
+	<router-link
+		to="/signup"
+		class="form__link"
+	>
+		Sign Up
+	</router-link>
+	<div
+		v-if="v$.password.$error || v$.email.$error"
+		class="form__error"
+	>
+		Wrong email or password
+	</div>
 </template>
 
 <script>
 
+import FormInput from './FormInput.vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, helpers } from '@vuelidate/validators'
 import { useStore } from 'vuex'
@@ -71,6 +64,7 @@ export default {
 	},
 	data () {
 		return {
+			disabled: false,
 			v$: useVuelidate(),
 			email: '',
 			password: ''
@@ -94,6 +88,8 @@ export default {
 			this.v$.$validate()
 			if (!this.v$.$error) {
 				this.login()
+			} else {
+				this.disabled = true
 			}
 		},
 		async login () {
@@ -108,50 +104,9 @@ export default {
 				console.log(e)
 			}
 		}
+	},
+	components: {
+		FormInput
 	}
-
 }
 </script>
-
-<style scoped lang="scss">
-.form {
-	max-width: 230px;
-	width: 100%;
-	background: #FFFFFF;
-	border-radius: 40px;
-	padding: 23px 22px 18px;
-	margin: 0 auto 30px;
-
-	&__signin {
-		width: 100%;
-		font-weight: 500;
-		line-height: 143%;
-		color: #FFFFFF;
-		background: #1E1A3E;
-		border-style: none;
-		border-radius: 50px;
-		padding: 15px 0;
-	}
-
-	&__text {
-		font-weight: 500;
-		line-height: 143%;
-		color: #1E1A3E;
-	}
-
-	&__field {
-		background: #FFFFFF;
-		margin-bottom: 25px;
-	}
-
-	&__error {
-		display: block;
-		font-size: 10px;
-		line-height: 200%;
-		color: #FF6683;
-		background: #FFFFFF;
-		text-align: start;
-		padding-left: 20px;
-	}
-}
-</style>

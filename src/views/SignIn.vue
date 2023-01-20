@@ -2,7 +2,7 @@
 <div class="signin">
 		<div class="container">
 			<h1 class="title signin__title">Sign In</h1>
-			<form-sign-in></form-sign-in>
+			<form-sign-in/>
 		</div>
   </div>
 </template>
@@ -18,7 +18,9 @@ export default {
 
 <style scoped lang="scss">
 .signin {
-	margin-top: 65px;
+	padding-top: 65px;
+	padding-bottom: 17px;
+	position: relative;
 
 	&__title {
 		margin-bottom: 20px;

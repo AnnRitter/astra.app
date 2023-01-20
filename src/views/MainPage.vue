@@ -1,9 +1,19 @@
 <template>
   <div class="main">
-		<a href="#" @click="logout">Выход</a>
     <div class="container">
-      <h1>Hello, {{ name }}!</h1>
+      <h1
+				class="title"
+			>
+				Hello, {{ capitalize(name) }}!
+			</h1>
       <div class="main__image"></div>
+			<a
+				class="logout-button"
+				href="#"
+				@click="logout"
+			>
+				Выход
+			</a>
     </div>
   </div>
 </template>
@@ -26,6 +36,9 @@ export default {
 		logout () {
 			this.store.commit('auth/logout')
 			this.router.push('/')
+		},
+		capitalize (string) {
+			return string.charAt(0).toUpperCase() + string.slice(1)
 		}
 	}
 }
@@ -33,8 +46,8 @@ export default {
 
 <style scoped lang="scss">
   .main {
-    margin-top: 160px;
-
+    padding-top: 160px;
+		padding-bottom: 30px;
     &__image {
       width: 100%;
 			height: 531px;

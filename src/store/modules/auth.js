@@ -50,6 +50,8 @@ export default {
 				commit('setUserData', userData)
 			} catch (e) {
 				console.log(e.response.data.error.message)
+				throw new Error(e)
+				// обработать ошибку, вывести сообщение
 			}
 		},
 		async sendUserData (_, payload) {

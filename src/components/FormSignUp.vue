@@ -1,94 +1,58 @@
 <template>
 	<form class="form" @submit.prevent>
-		<div class="form__field">
-			<label
-				for="name"
-				class="label"
-			>
-				Full name
-			</label>
-			<input
-				v-model="name"
-				type="text"
-				id="name"
-				class="input"
-			>
-		</div>
-		<div class="form__field">
-			<label
-				for="email"
-				class="label"
-			>
-				Email
-			</label>
-			<input
-				v-model="email"
-				type="text"
-				id="email"
-				class="input"
-			>
-			<span
-				v-if="v$.email.$error"
-				class="form__error"
-			>
-				{{ v$.email.$errors[0].$message }}
-			</span>
-		</div>
-		<div class="form__field">
-			<label
-				for="password"
-				class="label"
-			>
-				Password
-			</label>
-			<input
-				v-model="password.password"
-				type="password"
-				name="password"
-				id="password"
-				class="input"
-			>
-			<span
-				v-if="v$.password.password.$error"
-				class="form__error"
-			>
-				{{ v$.password.password.$errors[0].$message }}
-			</span>
-		</div>
-		<div class="form__field">
-			<label
-				for="repeat"
-				class="label"
-			>
-				Repeat password
-			</label>
-			<input
-				v-model="password.confirm"
-				type="password"
-				name="repeat"
-				id="repeat"
-				class="input"
-			>
-			<span
-				v-if="v$.password.confirm.$error"
-				class="form__error"
-			>
-				{{ v$.password.confirm.$errors[0].$message }}
-			</span>
-		</div>
+		<form-input
+			inputType="text"
+			inputId="name"
+			title="Full name"
+			:hasError="v$.name.$error"
+			:errorText="v$.name.$errors[0]?.$message"
+			v-model="name"
+		/>
+		<form-input
+			inputType="text"
+			inputId="email"
+			title="Email"
+			:hasError="v$.email.$error"
+			:errorText="v$.email.$errors[0]?.$message"
+			v-model="email"
+		/>
+		<form-input
+			inputType="password"
+			inputId="password"
+			title="Password"
+			hasVisibility="true"
+			:hasError="v$.password.password.$error"
+			:errorText="v$.password.password.$errors[0]?.$message"
+			v-model="password.password"
+		/>
+		<form-input
+			inputType="password"
+			inputId="repeat"
+			title="Repeat password"
+			hasVisibility="true"
+			:hasError="v$.password.confirm.$error"
+			:errorText="v$.password.confirm.$errors[0]?.$message"
+			v-model="password.confirm"
+		/>
 		<button
-			class="form__signup"
+			class="form__submit"
 			@click="submit"
 		>
 			Sign Up
 		</button>
 	</form>
-	<p class="form__text">Already have an account?</p>
-	<router-link to="/signin" class="form__text">Sign In</router-link>
+	<p class="form__link">Already have an account?</p>
+	<router-link
+		to="/signin"
+		class="form__link"
+	>
+		Sign In
+	</router-link>
 </template>
 
 <script>
 
+import FormInput from './FormInput.vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, sameAs, helpers } from '@vuelidate/validators'
 import { useStore } from 'vuex'
@@ -118,6 +82,9 @@ export default {
 	},
 	validations () {
 		return {
+			name: {
+				required: helpers.withMessage('Enter your name', required)
+			},
 			email: {
 				required: helpers.withMessage('Enter valid email', required),
 				email: helpers.withMessage('Enter valid email', email)
@@ -155,50 +122,9 @@ export default {
 				console.log(e)
 			}
 		}
+	},
+	components: {
+		FormInput
 	}
-
 }
 </script>
-
-<style scoped lang="scss">
-.form {
-	max-width: 230px;
-	width: 100%;
-	background: #FFFFFF;
-	border-radius: 40px;
-	padding: 23px 22px 18px;
-	margin: 0 auto 30px;
-
-	&__signup {
-		width: 100%;
-		font-weight: 500;
-		line-height: 143%;
-		color: #FFFFFF;
-		background: #1E1A3E;
-		border-style: none;
-		border-radius: 50px;
-		padding: 15px 0;
-	}
-
-	&__text {
-		font-weight: 500;
-		line-height: 143%;
-		color: #1E1A3E;
-	}
-
-	&__error {
-		display: block;
-		font-size: 10px;
-		line-height: 200%;
-		color: #FF6683;
-		background: #FFFFFF;
-		text-align: start;
-		padding-left: 20px;
-	}
-
-	&__field {
-		background: #FFFFFF;
-		margin-bottom: 25px;
-	}
-}
-</style>
